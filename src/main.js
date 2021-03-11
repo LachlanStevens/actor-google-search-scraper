@@ -14,6 +14,10 @@ const { log } = Apify.utils;
 
 Apify.main(async () => {
     const input = await Apify.getInput();
+    console.log('Input:');
+    console.dir(input);
+
+    if (!input || !input.url) throw new Error('Input must be a JSON object with the "url" field!');
 
     const {
         maxConcurrency,
@@ -94,6 +98,7 @@ Apify.main(async () => {
                 paidProducts: extractors.extractPaidProducts($),
                 organicResults: extractors.extractOrganicResults($, host),
                 peopleAlsoAsk: extractors.extractPeopleAlsoAsk($),
+                googleMyBusiness: extractors.getGoogleMyBusiness($),
                 customData: customDataFunction
                     ? await executeCustomDataFunction(customDataFunction, { input, $, request, response, html: body, Apify })
                     : null,

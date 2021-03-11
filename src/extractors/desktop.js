@@ -1,6 +1,10 @@
 const { ensureItsAbsoluteUrl } = require('./ensure_absolute_url');
 const { extractPeopleAlsoAsk } = require('./extractor_tools');
 
+exports.getGoogleMyBusiness = ($) => {
+    return ($('body'));
+}
+
 exports.extractOrganicResults = ($) => {
     // Executed on a single organic result (row)
     const parseResult = (el) => {
